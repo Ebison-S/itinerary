@@ -55,9 +55,6 @@ export default function ItineraryBuilderPage() {
   const [generating, setGenerating] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(Boolean(location.state?.openAiPlan));
 
-  // Arriving here right after trip creation opens the AI modal automatically.
-  // Clear the navigation flag so refreshing or coming back later doesn't
-  // reopen it unexpectedly.
   useEffect(() => {
     if (location.state?.openAiPlan) {
       navigate(location.pathname, { replace: true, state: {} });
@@ -141,11 +138,11 @@ export default function ItineraryBuilderPage() {
   }
 
   return (
-    <div>
+    <div className="pt-2">
       {days.length > 0 && (
-        <div className="flex justify-end mb-6">
+        <div className="flex justify-end mb-7">
           <Button variant="secondary" onClick={() => setAiModalOpen(true)}>
-            <Sparkles className="w-4 h-4" strokeWidth={1.75} />
+            <Sparkles className="w-4 h-4" strokeWidth={2} />
             Plan with AI
           </Button>
         </div>
@@ -162,7 +159,7 @@ export default function ItineraryBuilderPage() {
                 Generate empty days
               </Button>
               <Button variant="secondary" onClick={() => setAiModalOpen(true)}>
-                <Sparkles className="w-4 h-4" strokeWidth={1.75} />
+                <Sparkles className="w-4 h-4" strokeWidth={2} />
                 Plan with AI
               </Button>
             </div>

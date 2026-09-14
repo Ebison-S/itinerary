@@ -4,55 +4,55 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: {
-          DEFAULT: '#0C1412',
-          soft: '#101B18',
+        cream: {
+          DEFAULT: '#FBF6EF',
+          deep: '#F3EAD9',
+          paper: '#FFFFFF',
         },
-        surface: {
-          DEFAULT: '#141F1C',
-          hover: '#1A2925',
-          elevated: '#182420',
-          border: '#223330',
+        ink: {
+          DEFAULT: '#201C1D',
+          soft: '#5C5556',
+          faint: '#9C9294',
         },
-        text: {
-          DEFAULT: '#EDF3F0',
-          muted: '#8FA39C',
-          faint: '#5E736C',
+        coral: {
+          DEFAULT: '#FF6B4A',
+          deep: '#E14F30',
+          soft: '#FFE4DB',
         },
-        accent: {
-          DEFAULT: '#4FBF9F',
-          hover: '#63D4B3',
-          subtle: 'rgba(79,191,159,0.12)',
+        gold: {
+          DEFAULT: '#F2B705',
+          soft: '#FDF0C7',
         },
-        warn: {
-          DEFAULT: '#E8A34D',
-          subtle: 'rgba(232,163,77,0.12)',
+        teal: {
+          DEFAULT: '#1F8A70',
+          soft: '#DCF2EC',
         },
-        danger: {
-          DEFAULT: '#E2685A',
-          subtle: 'rgba(226,104,90,0.12)',
+        border: {
+          DEFAULT: '#EFE3D0',
         },
       },
       fontFamily: {
         display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        sans: ['"Outfit"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       fontSize: {
-        'display-xl': ['3.75rem', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        'display-lg': ['2.75rem', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
-        'display-md': ['1.875rem', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
+        'display-xl': ['5rem', { lineHeight: '0.98', letterSpacing: '-0.03em' }],
+        'display-lg': ['3.5rem', { lineHeight: '1.0', letterSpacing: '-0.03em' }],
+        'display-md': ['2.25rem', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        'display-sm': ['1.5rem', { lineHeight: '1.1', letterSpacing: '-0.01em' }],
       },
       borderRadius: {
-        sm: '8px',
-        md: '12px',
-        lg: '16px',
-        xl: '20px',
+        tile: '28px',
+        card: '22px',
+        pill: '999px',
       },
       boxShadow: {
-        card: '0 1px 0 rgba(255,255,255,0.03) inset, 0 8px 24px -12px rgba(0,0,0,0.5)',
-        modal: '0 24px 64px -20px rgba(0,0,0,0.6)',
-        glow: '0 0 0 1px rgba(79,191,159,0.4), 0 0 24px -4px rgba(79,191,159,0.35)',
+        coral: '0 20px 40px -16px rgba(255,107,74,0.35)',
+        'coral-sm': '0 10px 24px -12px rgba(255,107,74,0.3)',
+        soft: '0 16px 40px -20px rgba(32,28,29,0.18)',
+        'soft-sm': '0 8px 20px -10px rgba(32,28,29,0.14)',
+        gold: '0 16px 32px -14px rgba(242,183,5,0.35)',
       },
       keyframes: {
         'draw-route': {
@@ -60,18 +60,23 @@ export default {
           to: { strokeDashoffset: '0' },
         },
         'rise-in': {
-          from: { opacity: '0', transform: 'translateY(8px)' },
+          from: { opacity: '0', transform: 'translateY(10px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
         'fade-in': {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-6px)' },
+        },
       },
       animation: {
-        'draw-route': 'draw-route 1.1s ease-out forwards',
-        'rise-in': 'rise-in 0.25s ease-out forwards',
-        'fade-in': 'fade-in 0.2s ease-out forwards',
+        'draw-route': 'draw-route 1.2s ease-out forwards',
+        'rise-in': 'rise-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in': 'fade-in 0.25s ease-out forwards',
+        float: 'float 4s ease-in-out infinite',
       },
     },
   },

@@ -24,17 +24,17 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <header className="flex items-end justify-between mb-8 flex-wrap gap-4">
+      <header className="flex items-end justify-between mb-9 flex-wrap gap-4 pt-2">
         <div>
-          <h1 className="font-display text-display-md">
+          <h1 className="font-display text-display-md font-bold">
             {greeting()}, {user?.fullName?.split(' ')[0]}
           </h1>
-          <p className="text-sm text-text-muted mt-1">
+          <p className="text-sm text-ink-soft mt-1.5">
             {trips.length === 0 ? 'No trips yet' : `${upcoming.length} trip${upcoming.length === 1 ? '' : 's'} in motion`}
           </p>
         </div>
         <Link to="/trips/new" className="btn-primary">
-          <Plus className="w-4 h-4" strokeWidth={1.75} />
+          <Plus className="w-4 h-4" strokeWidth={2.25} />
           Plan a trip
         </Link>
       </header>
@@ -55,11 +55,11 @@ export default function DashboardPage() {
           }
         />
       ) : (
-        <div className="space-y-10">
+        <div className="space-y-12">
           {upcoming.length > 0 && (
             <section>
-              <h2 className="text-sm font-medium text-text-muted mb-3">Upcoming & in planning</h2>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <h2 className="text-sm font-bold text-ink-soft uppercase tracking-wide mb-4">Upcoming & in planning</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {upcoming.map((trip) => (
                   <TripCard key={trip.id} trip={trip} />
                 ))}
@@ -69,8 +69,8 @@ export default function DashboardPage() {
 
           {past.length > 0 && (
             <section>
-              <h2 className="text-sm font-medium text-text-muted mb-3">Past trips</h2>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <h2 className="text-sm font-bold text-ink-soft uppercase tracking-wide mb-4">Past trips</h2>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {past.map((trip) => (
                   <TripCard key={trip.id} trip={trip} />
                 ))}

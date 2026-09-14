@@ -1,14 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 
-// Maps trip/collaborator status values to one of the four semantic badge
-// tones defined in index.css (accent / warn / danger / muted).
 const TONE_CLASS = {
-  PLANNING: 'badge-warn',
-  UPCOMING: 'badge-accent',
-  ONGOING: 'badge-accent',
-  COMPLETED: 'badge-muted',
-  CANCELLED: 'badge-danger',
+  PLANNING: 'badge-gold',
+  UPCOMING: 'badge-coral',
+  ONGOING: 'badge-coral',
+  COMPLETED: 'badge-teal',
+  CANCELLED: 'badge-muted',
 };
 
 export default function Badge({ children, tone, className }) {

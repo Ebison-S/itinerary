@@ -57,9 +57,9 @@ export default function ItemFormModal({ open, onClose, onSubmit, initialValues, 
         <Input label="Booking reference" value={form.bookingRef} onChange={update('bookingRef')} />
 
         <div>
-          <label className="block text-sm font-medium text-text mb-1.5">Notes</label>
+          <label className="block text-sm font-bold text-ink mb-1.5 pl-1">Notes</label>
           <textarea
-            className="input-field min-h-[70px] resize-y"
+            className="input-field min-h-[76px] resize-y"
             value={form.description}
             onChange={update('description')}
           />

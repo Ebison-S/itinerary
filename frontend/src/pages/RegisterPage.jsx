@@ -33,8 +33,8 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <h1 className="font-display text-display-md mb-2">Start your journal</h1>
-      <p className="text-sm text-text-muted mb-8">A place for every trip you're planning next.</p>
+      <h1 className="font-display text-display-sm font-bold mb-2">Start your journal</h1>
+      <p className="text-sm text-ink-soft mb-8">A place for every trip you're planning next.</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
@@ -66,16 +66,16 @@ export default function RegisterPage() {
           onBlur={() => setTouched(true)}
         />
 
-        {error && <p className="text-sm text-danger">{error}</p>}
+        {error && <p className="text-sm text-coral-deep font-bold">{error}</p>}
 
         <Button type="submit" loading={status === 'loading'} className="w-full mt-2">
           Create account
         </Button>
       </form>
 
-      <p className="text-sm text-text-muted mt-6">
-        Already planning with Compass?{' '}
-        <Link to="/login" className="text-accent hover:text-accent-hover hover:underline">
+      <p className="text-sm text-ink-soft mt-7">
+        Already planning with Waypoint?{' '}
+        <Link to="/login" className="text-coral font-bold hover:text-coral-deep hover:underline">
           Sign in
         </Link>
       </p>

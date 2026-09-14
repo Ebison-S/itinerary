@@ -4,24 +4,24 @@
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    @apply bg-bg text-text font-sans antialiased;
+    @apply bg-cream text-ink font-sans antialiased;
   }
 
   h1, h2, h3 {
-    @apply font-display text-text;
+    @apply font-display text-ink;
   }
 
   ::selection {
-    background: rgba(79, 191, 159, 0.3);
+    background: rgba(255, 107, 74, 0.25);
   }
 
   :focus-visible {
-    outline: 2px solid theme('colors.accent.DEFAULT');
-    outline-offset: 2px;
+    outline: 2px solid theme('colors.coral.DEFAULT');
+    outline-offset: 3px;
     border-radius: 4px;
   }
 
@@ -35,77 +35,92 @@
 }
 
 @layer components {
-  /* Primary content surface — used everywhere a card was previously
-     "ticket parchment". One consistent elevation system, no color swap. */
-  .card {
-    @apply bg-surface border border-surface-border rounded-lg shadow-card;
+  /* Bento tile: the primary content surface. White paper on cream,
+     generous radius, warm soft shadow instead of a flat border-only card. */
+  .tile {
+    @apply bg-cream-paper rounded-tile shadow-soft-sm border border-border;
   }
 
-  .card-hover {
-    @apply transition-colors hover:bg-surface-hover hover:border-accent/30;
+  .tile-hover {
+    @apply transition-all duration-300 hover:shadow-soft hover:-translate-y-1;
+  }
+
+  .card {
+    @apply bg-cream-paper rounded-card shadow-soft-sm border border-border;
   }
 
   .route-line {
-    stroke: theme('colors.accent.DEFAULT');
-    stroke-width: 2;
+    stroke: theme('colors.coral.DEFAULT');
+    stroke-width: 2.5;
     fill: none;
     stroke-linecap: round;
   }
 
   .waypoint-dot {
-    fill: theme('colors.accent.DEFAULT');
+    fill: theme('colors.coral.DEFAULT');
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-accent text-bg font-semibold
-           px-4 py-2.5 rounded-md transition-colors hover:bg-accent-hover
-           disabled:opacity-40 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 bg-coral text-cream-paper font-semibold
+           px-6 py-3 rounded-pill shadow-coral-sm transition-all duration-200
+           hover:bg-coral-deep hover:shadow-coral hover:-translate-y-0.5
+           active:translate-y-0
+           disabled:opacity-40 disabled:pointer-events-none disabled:shadow-none;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 bg-transparent text-text font-medium
-           px-4 py-2.5 rounded-md border border-surface-border transition-colors
-           hover:border-accent/50 hover:text-accent
+    @apply inline-flex items-center justify-center gap-2 bg-cream-paper text-ink font-semibold
+           px-6 py-3 rounded-pill border-2 border-ink/10 transition-all duration-200
+           hover:border-coral hover:text-coral
            disabled:opacity-40 disabled:pointer-events-none;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-1.5 text-sm font-medium text-text-muted
-           transition-colors hover:text-accent disabled:opacity-40 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-ink-soft
+           transition-colors hover:text-coral disabled:opacity-40 disabled:pointer-events-none;
   }
 
   .btn-danger-ghost {
-    @apply inline-flex items-center justify-center gap-1.5 text-sm font-medium text-text-muted
-           transition-colors hover:text-danger disabled:opacity-40 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-1.5 text-sm font-semibold text-ink-soft
+           transition-colors hover:text-coral-deep disabled:opacity-40 disabled:pointer-events-none;
   }
 
   .input-field {
-    @apply w-full bg-bg-soft border border-surface-border rounded-md px-3.5 py-2.5
-           text-text placeholder:text-text-faint text-sm
-           focus:border-accent focus:outline-none transition-colors;
+    @apply w-full bg-cream-deep/60 border-2 border-transparent rounded-pill px-5 py-3
+           text-ink placeholder:text-ink-faint text-sm font-medium
+           focus:border-coral focus:bg-cream-paper focus:outline-none transition-all;
+  }
+
+  textarea.input-field {
+    @apply rounded-card;
   }
 
   .data-mono {
-    @apply font-mono text-sm tracking-tight text-text-muted;
+    @apply font-mono text-xs tracking-tight text-ink-soft;
   }
 
   .badge {
-    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-pill text-xs font-bold uppercase tracking-wide;
   }
 
-  .badge-accent {
-    @apply badge bg-accent-subtle text-accent;
+  .badge-coral {
+    @apply badge bg-coral-soft text-coral-deep;
   }
 
-  .badge-warn {
-    @apply badge bg-warn-subtle text-warn;
+  .badge-gold {
+    @apply badge bg-gold-soft text-ink;
   }
 
-  .badge-danger {
-    @apply badge bg-danger-subtle text-danger;
+  .badge-teal {
+    @apply badge bg-teal-soft text-teal;
   }
 
   .badge-muted {
-    @apply badge bg-surface-hover text-text-muted;
+    @apply badge bg-cream-deep text-ink-soft;
+  }
+
+  /* Floating pill navigation -- replaces the sidebar pattern entirely. */
+  .nav-pill {
+    @apply bg-cream-paper/90 backdrop-blur-md rounded-pill border border-border shadow-soft-sm;
   }
 }

@@ -32,11 +32,11 @@ export default function InviteModal({ open, onClose, onSubmit, submitting }) {
           value={form.role}
           onChange={(e) => setForm({ ...form, role: e.target.value })}
         />
-        <p className="text-xs text-text-faint">
-          They'll need an existing Compass account with this email to accept.
+        <p className="text-xs text-ink-faint pl-1">
+          They'll need an existing Waypoint account with this email to accept.
         </p>
         <Button type="submit" loading={submitting} className="w-full">
-          <UserPlus className="w-4 h-4" strokeWidth={1.75} />
+          <UserPlus className="w-4 h-4" strokeWidth={2} />
           Send invite
         </Button>
       </form>

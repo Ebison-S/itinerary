@@ -90,15 +90,15 @@ export default function BudgetPage() {
   }
 
   return (
-    <div>
-      <div className="grid md:grid-cols-2 gap-4 mb-8">
+    <div className="pt-2">
+      <div className="grid md:grid-cols-2 gap-5 mb-8">
         <BudgetOverviewCard summary={summary} onEditBudget={openBudgetModal} />
         <CategoryPieChart breakdown={summary.categoryBreakdown} currency={summary.currency} />
       </div>
 
-      <div className="card p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-display text-lg">Expenses</h2>
+      <div className="tile p-7">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="font-display text-xl font-bold">Expenses</h2>
           <button
             onClick={() => {
               setEditingExpense(null);
@@ -106,7 +106,7 @@ export default function BudgetPage() {
             }}
             className="btn-ghost text-sm"
           >
-            <Plus className="w-3.5 h-3.5" strokeWidth={1.75} />
+            <Plus className="w-3.5 h-3.5" strokeWidth={2.25} />
             Log expense
           </button>
         </div>

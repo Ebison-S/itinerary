@@ -15,7 +15,7 @@ export default function DayTimeline({ day, onReorder, onAddItem, onEditItem, onD
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
   const items = day.items;
 
-  const lineHeight = useMemo(() => Math.max(items.length * 96, 24), [items.length]);
+  const lineHeight = useMemo(() => Math.max(items.length * 100, 24), [items.length]);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -29,19 +29,16 @@ export default function DayTimeline({ day, onReorder, onAddItem, onEditItem, onD
 
   return (
     <div className="mb-10">
-      <div className="flex items-baseline justify-between mb-4">
+      <div className="flex items-baseline justify-between mb-5">
         <div>
-          <h3 className="font-display text-lg">
+          <h3 className="font-display text-xl font-bold">
             Day {day.dayNumber}
-            {day.title && <span className="text-text-muted font-normal"> — {day.title}</span>}
+            {day.title && <span className="text-ink-soft font-medium"> — {day.title}</span>}
           </h3>
-          <p className="data-mono text-xs">{formatDateShort(day.date)}</p>
+          <p className="data-mono mt-0.5">{formatDateShort(day.date)}</p>
         </div>
-        <button
-          onClick={() => onAddItem(day)}
-          className="btn-ghost text-sm shrink-0"
-        >
-          <Plus className="w-3.5 h-3.5" strokeWidth={1.75} />
+        <button onClick={() => onAddItem(day)} className="btn-ghost text-sm shrink-0">
+          <Plus className="w-3.5 h-3.5" strokeWidth={2.25} />
           Add to this day
         </button>
       </div>
@@ -49,17 +46,17 @@ export default function DayTimeline({ day, onReorder, onAddItem, onEditItem, onD
       <div className="relative">
         {items.length > 0 && (
           <svg
-            className="absolute left-4 top-4 -z-0"
-            width="2"
+            className="absolute left-5 top-5 -z-0"
+            width="2.5"
             height={lineHeight}
             style={{ overflow: 'visible' }}
           >
-            <line x1="1" y1="0" x2="1" y2={lineHeight} className="route-line" />
+            <line x1="1.25" y1="0" x2="1.25" y2={lineHeight} className="route-line" />
           </svg>
         )}
 
         {items.length === 0 ? (
-          <p className="pl-10 text-sm text-text-faint italic py-4">Nothing planned yet for this day.</p>
+          <p className="pl-12 text-sm text-ink-faint italic py-4">Nothing planned yet for this day.</p>
         ) : (
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>

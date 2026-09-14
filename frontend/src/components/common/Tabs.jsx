@@ -3,16 +3,16 @@ import clsx from 'clsx';
 
 export default function Tabs({ tabs, active, onChange }) {
   return (
-    <div className="inline-flex bg-bg-soft border border-surface-border rounded-md p-1 gap-1">
+    <div className="inline-flex bg-cream-deep rounded-pill p-1.5 gap-1">
       {tabs.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onChange(tab.value)}
           className={clsx(
-            'px-3.5 py-1.5 rounded-sm text-sm font-medium transition-colors',
+            'px-4 py-2 rounded-pill text-sm font-bold transition-all',
             active === tab.value
-              ? 'bg-accent text-bg'
-              : 'text-text-muted hover:text-text'
+              ? 'bg-coral text-cream-paper shadow-coral-sm'
+              : 'text-ink-soft hover:text-ink'
           )}
         >
           {tab.label}

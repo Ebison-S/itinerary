@@ -5,13 +5,13 @@ export default function Input({ label, error, hint, className, id, ...props }) {
   return (
     <div className="space-y-1.5">
       {label && (
-        <label htmlFor={inputId} className="block text-sm font-medium text-text">
+        <label htmlFor={inputId} className="block text-sm font-bold text-ink pl-1">
           {label}
         </label>
       )}
       <input id={inputId} className="input-field" {...props} />
-      {hint && !error && <p className="text-xs text-text-faint">{hint}</p>}
-      {error && <p className="text-xs text-danger">{error}</p>}
+      {hint && !error && <p className="text-xs text-ink-faint pl-1">{hint}</p>}
+      {error && <p className="text-xs text-coral-deep font-medium pl-1">{error}</p>}
     </div>
   );
 }

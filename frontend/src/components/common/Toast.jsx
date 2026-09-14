@@ -14,10 +14,10 @@ export function showUndoToast(message, durationMs = 4000) {
     const id = toast.custom(
       (t) => (
         <div
-          className="card flex items-center gap-4 px-4 py-3"
+          className="tile flex items-center gap-4 px-5 py-3"
           style={{ opacity: t.visible ? 1 : 0, transition: 'opacity 150ms' }}
         >
-          <span className="text-sm text-text">{message}</span>
+          <span className="text-sm font-medium text-ink">{message}</span>
           <button
             onClick={() => {
               if (settled) return;
@@ -25,7 +25,7 @@ export function showUndoToast(message, durationMs = 4000) {
               toast.dismiss(t.id);
               resolve(true);
             }}
-            className="text-sm font-medium text-accent hover:text-accent-hover shrink-0"
+            className="text-sm font-bold text-coral hover:text-coral-deep shrink-0"
           >
             Undo
           </button>

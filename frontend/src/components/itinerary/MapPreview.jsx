@@ -9,9 +9,9 @@ export default function MapPreview({ items = [] }) {
 
   if (points.length === 0) {
     return (
-      <div className="card p-6 flex flex-col items-center justify-center text-center h-48">
-        <MapPin className="w-6 h-6 text-text-faint mb-2" strokeWidth={1.5} />
-        <p className="text-sm text-text-muted">
+      <div className="card p-8 flex flex-col items-center justify-center text-center h-48">
+        <MapPin className="w-6 h-6 text-ink-faint mb-2" strokeWidth={1.75} />
+        <p className="text-sm text-ink-soft">
           No stops with a location yet — add coordinates to see them plotted here.
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function MapPreview({ items = [] }) {
     .join(' ');
 
   return (
-    <div className="card p-4">
+    <div className="card p-5">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto">
         {points.length > 1 && <path d={pathD} className="route-line" />}
         {points.map((p, i) => {
@@ -54,8 +54,8 @@ export default function MapPreview({ items = [] }) {
               <text
                 x={x + 10}
                 y={y + 4}
-                fill="#8FA39C"
-                style={{ font: '10px "IBM Plex Mono", monospace' }}
+                fill="#5C5556"
+                style={{ font: '10px "JetBrains Mono", monospace' }}
               >
                 {p.title?.slice(0, 18)}
               </text>

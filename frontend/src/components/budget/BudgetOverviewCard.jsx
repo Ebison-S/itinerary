@@ -9,26 +9,26 @@ export default function BudgetOverviewCard({ summary, onEditBudget }) {
 
   return (
     <div className="card p-6">
-      <div className="flex items-start justify-between mb-5">
+      <div className="flex items-start justify-between mb-6">
         <div>
-          <p className="data-mono text-xs mb-1">Total budget</p>
-          <p className="font-display text-3xl">{formatCurrency(summary.totalBudget, summary.currency)}</p>
+          <p className="data-mono mb-1">Total budget</p>
+          <p className="font-display text-4xl font-bold">{formatCurrency(summary.totalBudget, summary.currency)}</p>
         </div>
         <button onClick={onEditBudget} className="btn-ghost text-sm">
-          <Pencil className="w-3.5 h-3.5" strokeWidth={1.75} />
+          <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
           Edit
         </button>
       </div>
 
-      <div className="h-2 bg-bg-soft rounded-full overflow-hidden mb-2">
+      <div className="h-3 bg-cream-deep rounded-pill overflow-hidden mb-3">
         <div
-          className={clsx('h-full rounded-full transition-all duration-500', over ? 'bg-danger' : 'bg-accent')}
+          className={clsx('h-full rounded-pill transition-all duration-500', over ? 'bg-coral-deep' : 'bg-coral')}
           style={{ width: `${pct}%` }}
         />
       </div>
 
       <div className="flex justify-between text-sm">
-        <span className={clsx('data-mono', over && 'text-danger')}>
+        <span className={clsx('data-mono font-bold', over && 'text-coral-deep')}>
           {formatCurrency(summary.totalSpent, summary.currency)} spent
         </span>
         <span className="data-mono">

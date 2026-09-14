@@ -59,18 +59,18 @@ export default function CollaboratorsPage() {
   }
 
   return (
-    <div className="max-w-lg">
-      <div className="card p-6">
+    <div className="max-w-lg pt-2">
+      <div className="tile p-7">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="font-display text-lg">Who's planning this trip</h2>
+          <h2 className="font-display text-xl font-bold">Who's planning this trip</h2>
           {isOwner && (
             <button onClick={() => setModalOpen(true)} className="btn-ghost text-sm">
-              <UserPlus className="w-3.5 h-3.5" strokeWidth={1.75} />
+              <UserPlus className="w-3.5 h-3.5" strokeWidth={2.25} />
               Invite
             </button>
           )}
         </div>
-        <p className="text-sm text-text-muted mb-3">
+        <p className="text-sm text-ink-soft mb-3">
           {isOwner ? 'You own this trip.' : 'You have collaborator access to this trip.'}
         </p>
         <CollaboratorList

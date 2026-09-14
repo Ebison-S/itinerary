@@ -14,7 +14,7 @@ export default function TagInput({ label, hint, values, onChange, placeholder })
     if (!trimmed) return;
     if (values.some((v) => v.toLowerCase() === trimmed.toLowerCase())) {
       setDraft('');
-      return; // no duplicates
+      return;
     }
     onChange([...values, trimmed]);
     setDraft('');
@@ -33,7 +33,7 @@ export default function TagInput({ label, hint, values, onChange, placeholder })
 
   return (
     <div className="space-y-1.5">
-      {label && <label className="block text-sm font-medium text-text">{label}</label>}
+      {label && <label className="block text-sm font-bold text-ink pl-1">{label}</label>}
 
       <div className="flex gap-2">
         <input
@@ -46,10 +46,10 @@ export default function TagInput({ label, hint, values, onChange, placeholder })
         <button
           type="button"
           onClick={commit}
-          className="btn-secondary !px-3 shrink-0"
+          className="btn-secondary !px-4 shrink-0"
           aria-label="Add"
         >
-          <Plus className="w-4 h-4" strokeWidth={1.75} />
+          <Plus className="w-4 h-4" strokeWidth={2} />
         </button>
       </div>
 
@@ -58,23 +58,23 @@ export default function TagInput({ label, hint, values, onChange, placeholder })
           {values.map((value, i) => (
             <span
               key={`${value}-${i}`}
-              className="inline-flex items-center gap-1.5 bg-accent-subtle text-accent text-xs font-medium px-2.5 py-1 rounded-full"
+              className="inline-flex items-center gap-1.5 bg-gold-soft text-ink text-xs font-bold px-3 py-1.5 rounded-pill"
             >
               {value}
               <button
                 type="button"
                 onClick={() => removeAt(i)}
                 aria-label={`Remove ${value}`}
-                className="hover:text-text transition-colors"
+                className="hover:text-coral-deep transition-colors"
               >
-                <X className="w-3 h-3" strokeWidth={2} />
+                <X className="w-3 h-3" strokeWidth={2.5} />
               </button>
             </span>
           ))}
         </div>
       )}
 
-      {hint && <p className="text-xs text-text-faint">{hint}</p>}
+      {hint && <p className="text-xs text-ink-faint pl-1">{hint}</p>}
     </div>
   );
 }

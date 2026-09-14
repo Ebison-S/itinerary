@@ -35,21 +35,21 @@ export default function TripDetailPage() {
         <TripStatsBar trip={trip} budgetSummary={budgetSummary} dayCount={days.length} />
 
         {trip.description && (
-          <div className="card p-6">
-            <h2 className="text-sm font-medium text-text-muted mb-2">About this trip</h2>
-            <p className="text-text leading-relaxed">{trip.description}</p>
+          <div className="tile p-7">
+            <h2 className="text-sm font-bold text-ink-soft uppercase tracking-wide mb-2.5">About this trip</h2>
+            <p className="text-ink leading-relaxed">{trip.description}</p>
           </div>
         )}
 
         <section>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-medium text-text-muted">Route so far</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-bold text-ink-soft uppercase tracking-wide">Route so far</h2>
             <Link
               to={`/trips/${tripId}/itinerary`}
-              className="text-sm text-accent hover:text-accent-hover hover:underline flex items-center gap-1"
+              className="text-sm font-bold text-coral hover:text-coral-deep hover:underline flex items-center gap-1"
             >
               Open itinerary builder
-              <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.75} />
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.25} />
             </Link>
           </div>
 
@@ -57,7 +57,7 @@ export default function TripDetailPage() {
             <EmptyState
               icon={Route}
               title="No days planned yet"
-              description="Add your first stop and Compass will lay out the route as you go."
+              description="Add your first stop and Waypoint will lay out the route as you go."
               action={
                 <Link to={`/trips/${tripId}/itinerary`}>
                   <Button>Start the itinerary</Button>
@@ -65,11 +65,11 @@ export default function TripDetailPage() {
               }
             />
           ) : (
-            <div className="card p-6 grid sm:grid-cols-3 gap-4">
+            <div className="tile p-7 grid sm:grid-cols-3 gap-5">
               {days.slice(0, 6).map((day) => (
-                <div key={day.id} className="border-l-2 border-accent pl-3">
-                  <p className="data-mono text-xs">Day {day.dayNumber}</p>
-                  <p className="font-medium text-sm text-text truncate">
+                <div key={day.id} className="border-l-4 border-coral pl-4">
+                  <p className="data-mono mb-0.5">Day {day.dayNumber}</p>
+                  <p className="font-bold text-sm truncate">
                     {day.title || `${day.items.length} planned`}
                   </p>
                 </div>

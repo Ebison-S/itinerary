@@ -1,54 +1,82 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
+import { Compass, MapPinned, Plus, LogOut } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
+const NAV_ITEMS = [
+  { to: '/dashboard', label: 'Trips', icon: MapPinned },
+  { to: '/trips/new', label: 'New trip', icon: Plus },
+];
+
+/**
+ * The single floating pill nav that replaces the old sidebar+topbar
+ * pair. Sticky at the top of the viewport, full nav + branding + user
+ * menu all in one bar, leaving the rest of the page as open canvas.
+ */
 export default function Navbar() {
   const { user, signOut } = useAuth();
-  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="h-16 shrink-0 flex items-center justify-between px-6 sm:px-10 border-b border-surface-border">
-      <span className="data-mono text-xs">
-        {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
-      </span>
+    <div className="sticky top-4 z-40 px-4 sm:px-6 mb-8">
+      <nav className="nav-pill max-w-6xl mx-auto flex items-center justify-between gap-2 px-3 py-2">
+        <NavLink to="/dashboard" className="flex items-center gap-2 pl-2 pr-3 shrink-0">
+          <Compass className="w-5 h-5 text-coral" strokeWidth={2.25} />
+          <span className="font-display text-lg font-bold hidden sm:inline">Waypoint</span>
+        </NavLink>
 
-      <div className="relative">
-        <button
-          onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden w-8 h-8 rounded-full bg-accent-subtle text-accent flex items-center justify-center text-xs font-semibold"
-        >
-          {user?.fullName?.[0]?.toUpperCase() || '?'}
-        </button>
-
-        <button
-          onClick={() => {
-            signOut();
-            navigate('/');
-          }}
-          className="hidden md:inline-flex btn-secondary !px-3 !py-1.5 text-xs gap-1.5"
-        >
-          <LogOut className="w-3.5 h-3.5" strokeWidth={1.75} />
-          Sign out
-        </button>
-
-        {menuOpen && (
-          <div className="md:hidden absolute right-0 mt-2 w-40 card p-2 z-20">
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                signOut();
-                navigate('/');
-              }}
-              className="w-full text-left px-3 py-2 text-sm rounded-sm hover:bg-surface-hover transition-colors flex items-center gap-2"
+        <div className="flex items-center gap-1">
+          {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/dashboard'}
+              className={({ isActive }) =>
+                clsx(
+                  'flex items-center gap-1.5 px-3.5 py-2 rounded-pill text-sm font-bold transition-all',
+                  isActive
+                    ? 'bg-coral text-cream-paper shadow-coral-sm'
+                    : 'text-ink-soft hover:text-ink hover:bg-cream-deep'
+                )
+              }
             >
-              <LogOut className="w-4 h-4" strokeWidth={1.75} />
-              Sign out
-            </button>
-          </div>
-        )}
-      </div>
-    </header>
+              <Icon className="w-4 h-4" strokeWidth={2} />
+              <span className="hidden sm:inline">{label}</span>
+            </NavLink>
+          ))}
+        </div>
+
+        <div className="relative shrink-0">
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="w-10 h-10 rounded-full bg-gold-soft text-ink flex items-center justify-center text-sm font-bold hover:shadow-gold transition-shadow"
+          >
+            {user?.fullName?.[0]?.toUpperCase() || '?'}
+          </button>
+
+          {menuOpen && (
+            <div className="absolute right-0 mt-2 w-48 tile p-2 z-20 animate-rise-in">
+              <div className="px-3 py-2 mb-1">
+                <p className="text-sm font-bold text-ink truncate">{user?.fullName}</p>
+                <p className="text-xs text-ink-faint truncate">{user?.email}</p>
+              </div>
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  signOut();
+                  navigate('/');
+                }}
+                className="w-full text-left px-3 py-2.5 text-sm font-bold rounded-card hover:bg-coral-soft hover:text-coral-deep transition-colors flex items-center gap-2"
+              >
+                <LogOut className="w-4 h-4" strokeWidth={2} />
+                Sign out
+              </button>
+            </div>
+          )}
+        </div>
+      </nav>
+    </div>
   );
 }

@@ -19,17 +19,6 @@ const CURRENCIES = [
   { value: 'JPY', label: 'JPY' },
 ];
 
-/**
- * Three views in one modal:
- *   'form'     -> collect starting location, destinations, budget, preferences
- *   'progress' -> live SSE log while the agent thinks (AiPlanProgress)
- *   'preview'  -> the finished plan, with Apply / Discard
- *
- * Streaming state (progressLog, plan, planStatus) lives in Redux
- * (aiSlice) so it survives if the modal is briefly unmounted, but the
- * actual fetch + AbortController lives here since that's inherently a
- * component-lifecycle concern.
- */
 export default function AiPlanModal({
   open,
   onClose,
@@ -47,7 +36,7 @@ export default function AiPlanModal({
   onDiscard,
 }) {
   const { coords, status: geoStatus, error: geoError, requestLocation } = useGeolocation();
-  const [locationSource, setLocationSource] = useState(null); // 'coords' | 'text' | null
+  const [locationSource, setLocationSource] = useState(null);
   const [form, setForm] = useState({
     startLocationText: '',
     destinations: [],
@@ -111,8 +100,6 @@ export default function AiPlanModal({
     onClose();
   };
 
-  // Derive which of the three views to render from planStatus alone --
-  // no separate local "view" state to keep in sync.
   const view =
     planStatus === 'loading' ? 'progress'
     : planStatus === 'succeeded' && plan ? 'preview'
@@ -129,26 +116,26 @@ export default function AiPlanModal({
       {view === 'form' && (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-text mb-1.5">Starting location</label>
+            <label className="block text-sm font-bold text-ink mb-1.5 pl-1">Starting location</label>
             <div className="flex gap-2 mb-2">
               <Button
                 type="button"
                 variant="secondary"
-                className="!py-2 text-sm w-full"
+                className="!py-2.5 text-sm w-full"
                 onClick={handleUseLocation}
                 loading={geoStatus === 'loading'}
               >
-                <Navigation className="w-3.5 h-3.5" strokeWidth={1.75} />
+                <Navigation className="w-3.5 h-3.5" strokeWidth={2} />
                 Use my current location
               </Button>
             </div>
             {locationSource === 'coords' && coords && (
-              <p className="text-xs text-accent flex items-center gap-1.5 mb-2">
-                <MapPin className="w-3 h-3" strokeWidth={2} />
+              <p className="text-xs text-coral-deep font-bold flex items-center gap-1.5 mb-2 pl-1">
+                <MapPin className="w-3 h-3" strokeWidth={2.25} />
                 Using your location ({coords.latitude.toFixed(2)}, {coords.longitude.toFixed(2)})
               </p>
             )}
-            {geoError && <p className="text-xs text-warn mb-2">{geoError}</p>}
+            {geoError && <p className="text-xs text-gold-deep font-medium mb-2 pl-1">{geoError}</p>}
             <Input
               placeholder="Or type your starting city"
               value={form.startLocationText}
@@ -156,7 +143,7 @@ export default function AiPlanModal({
               disabled={locationSource === 'coords'}
             />
             {locationSource === 'coords' && (
-              <p className="text-xs text-text-faint mt-1">
+              <p className="text-xs text-ink-faint mt-1 pl-1">
                 Clear your captured location above to type a city instead.
               </p>
             )}
@@ -184,9 +171,9 @@ export default function AiPlanModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-text mb-1.5">Preferences (optional)</label>
+            <label className="block text-sm font-bold text-ink mb-1.5 pl-1">Preferences (optional)</label>
             <textarea
-              className="input-field min-h-[70px] resize-y"
+              className="input-field min-h-[76px] resize-y"
               placeholder="e.g. relaxed pace, food-focused, avoid long hikes"
               value={form.preferences}
               onChange={update('preferences')}
@@ -194,18 +181,18 @@ export default function AiPlanModal({
           </div>
 
           <Button type="submit" disabled={!locationSource} className="w-full">
-            <Sparkles className="w-4 h-4" strokeWidth={1.75} />
+            <Sparkles className="w-4 h-4" strokeWidth={2} />
             Generate plan
           </Button>
 
           {!locationSource && (
-            <p className="text-xs text-text-faint text-center">
+            <p className="text-xs text-ink-faint text-center">
               Use your current location or type a starting city to continue.
             </p>
           )}
 
           {planStatus === 'failed' && error && (
-            <p className="text-sm text-danger bg-danger-subtle rounded-md px-4 py-3">{error}</p>
+            <p className="text-sm text-coral-deep font-medium bg-coral-soft rounded-card px-4 py-3">{error}</p>
           )}
         </form>
       )}
@@ -214,7 +201,7 @@ export default function AiPlanModal({
         <div className="space-y-5">
           <AiPlanProgress messages={progressLog} streaming />
           <Button variant="secondary" className="w-full" onClick={handleCancelStream}>
-            <X className="w-4 h-4" strokeWidth={1.75} />
+            <X className="w-4 h-4" strokeWidth={2} />
             Cancel
           </Button>
         </div>
@@ -223,7 +210,7 @@ export default function AiPlanModal({
       {view === 'preview' && (
         <div className="space-y-5">
           {plan.summary && (
-            <p className="text-sm text-text-muted bg-accent-subtle text-accent rounded-md px-4 py-3">
+            <p className="text-sm text-ink font-medium bg-coral-soft text-coral-deep rounded-card px-4 py-3">
               {plan.summary}
             </p>
           )}
@@ -233,9 +220,9 @@ export default function AiPlanModal({
               {plan.destinations.map((d, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 bg-accent-subtle text-accent text-xs font-medium px-2.5 py-1 rounded-full"
+                  className="inline-flex items-center gap-1.5 bg-gold-soft text-ink text-xs font-bold px-3 py-1.5 rounded-pill"
                 >
-                  <MapPin className="w-3 h-3" strokeWidth={2} />
+                  <MapPin className="w-3 h-3" strokeWidth={2.25} />
                   {d.name}
                 </span>
               ))}
@@ -244,21 +231,21 @@ export default function AiPlanModal({
 
           <div className="space-y-4 max-h-96 overflow-y-auto pr-1">
             {plan.days?.map((day) => (
-              <div key={day.dayNumber} className="border-l-2 border-accent/40 pl-4">
+              <div key={day.dayNumber} className="border-l-4 border-coral-soft pl-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="w-3.5 h-3.5 text-text-faint" strokeWidth={1.75} />
-                  <p className="font-medium text-sm">
+                  <Calendar className="w-3.5 h-3.5 text-ink-faint" strokeWidth={2} />
+                  <p className="font-bold text-sm">
                     Day {day.dayNumber}
                     {day.title && ` — ${day.title}`}
                   </p>
-                  <span className="data-mono text-xs">{formatDateShort(day.date)}</span>
+                  <span className="data-mono">{formatDateShort(day.date)}</span>
                 </div>
                 <ul className="space-y-1.5">
                   {day.items?.map((item, i) => (
-                    <li key={i} className="text-sm text-text-muted flex items-center justify-between">
+                    <li key={i} className="text-sm text-ink-soft flex items-center justify-between">
                       <span>{item.title}</span>
                       {item.estimatedCost && (
-                        <span className="data-mono text-xs text-warn">
+                        <span className="data-mono text-gold font-bold">
                           {formatCurrency(item.estimatedCost, item.currency)}
                         </span>
                       )}
@@ -270,9 +257,9 @@ export default function AiPlanModal({
           </div>
 
           {plan.budgetSuggestion && (
-            <div className="card p-4">
-              <p className="data-mono text-xs mb-1">Suggested total budget</p>
-              <p className="font-display text-2xl">
+            <div className="card p-5">
+              <p className="data-mono mb-1">Suggested total budget</p>
+              <p className="font-display text-3xl font-bold">
                 {formatCurrency(plan.budgetSuggestion.totalBudget, form.currency)}
               </p>
             </div>

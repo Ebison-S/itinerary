@@ -43,43 +43,41 @@ export default function TimelineItemCard({ item, onEdit, onDelete }) {
     <div
       ref={setNodeRef}
       style={style}
-      className={clsx('relative pl-10 py-1 group', isDragging && 'opacity-50 z-10')}
+      className={clsx('relative pl-12 py-1 group', isDragging && 'opacity-50 z-10')}
     >
-      <span className="absolute left-[13px] top-5 w-3 h-3 rounded-full bg-accent border-2 border-bg" />
+      <span className="absolute left-[15px] top-6 w-3.5 h-3.5 rounded-full bg-coral border-4 border-cream" />
 
       <div className="card p-4 flex items-start gap-3">
         <button
           {...attributes}
           {...listeners}
-          className="cursor-grab active:cursor-grabbing text-text-faint hover:text-text-muted mt-1 shrink-0"
+          className="cursor-grab active:cursor-grabbing text-ink-faint hover:text-ink-soft mt-1 shrink-0"
           aria-label="Drag to reorder"
         >
-          <GripVertical className="w-4 h-4" strokeWidth={1.75} />
+          <GripVertical className="w-4 h-4" strokeWidth={2} />
         </button>
 
-        <div className="w-8 h-8 rounded-md bg-accent-subtle flex items-center justify-center shrink-0 mt-0.5">
-          <Icon className="w-4 h-4 text-accent" strokeWidth={1.75} />
+        <div className="w-9 h-9 rounded-full bg-coral-soft flex items-center justify-center shrink-0 mt-0.5">
+          <Icon className="w-4 h-4 text-coral-deep" strokeWidth={2} />
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h4 className="font-medium truncate text-text">{item.title}</h4>
-            <span className="data-mono text-[10px] uppercase tracking-wide">
-              {typeLabel}
-            </span>
+            <h4 className="font-bold truncate text-ink">{item.title}</h4>
+            <span className="data-mono uppercase tracking-wide">{typeLabel}</span>
           </div>
           {item.locationName && (
-            <p className="text-sm text-text-muted truncate">{item.locationName}</p>
+            <p className="text-sm text-ink-soft truncate">{item.locationName}</p>
           )}
           <div className="flex items-center gap-3 mt-1.5">
             {(item.startTime || item.endTime) && (
-              <span className="data-mono text-xs">
+              <span className="data-mono">
                 {formatTime(item.startTime)}
                 {item.endTime && ` – ${formatTime(item.endTime)}`}
               </span>
             )}
             {item.cost && (
-              <span className="data-mono text-xs text-warn">
+              <span className="data-mono text-gold font-bold">
                 {formatCurrency(item.cost, item.currency)}
               </span>
             )}
@@ -89,17 +87,17 @@ export default function TimelineItemCard({ item, onEdit, onDelete }) {
         <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1 shrink-0">
           <button
             onClick={() => onEdit(item)}
-            className="p-1.5 rounded-md text-text-faint hover:text-accent hover:bg-surface-hover"
+            className="p-2 rounded-pill text-ink-faint hover:text-coral hover:bg-coral-soft"
             aria-label="Edit"
           >
-            <Pencil className="w-3.5 h-3.5" strokeWidth={1.75} />
+            <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
           </button>
           <button
             onClick={() => onDelete(item)}
-            className="p-1.5 rounded-md text-text-faint hover:text-danger hover:bg-surface-hover"
+            className="p-2 rounded-pill text-ink-faint hover:text-coral-deep hover:bg-coral-soft"
             aria-label="Delete"
           >
-            <Trash2 className="w-3.5 h-3.5" strokeWidth={1.75} />
+            <Trash2 className="w-3.5 h-3.5" strokeWidth={2} />
           </button>
         </div>
       </div>

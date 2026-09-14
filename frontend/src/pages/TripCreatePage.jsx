@@ -17,17 +17,17 @@ export default function TripCreatePage() {
 
     if (createTrip.fulfilled.match(result)) {
       toast.success('Trip created');
-      navigate(`/trips/${result.payload.id}`);
+      navigate(`/trips/${result.payload.id}/itinerary`, { state: { openAiPlan: true } });
     } else {
       toast.error(result.payload || 'Could not create trip');
     }
   };
 
   return (
-    <div className="max-w-lg">
-      <h1 className="font-display text-display-md mb-1">Plan a new trip</h1>
-      <p className="text-sm text-text-muted mb-8">Start loose — dates and a title are all you need.</p>
-      <div className="card p-6">
+    <div className="max-w-lg pt-2">
+      <h1 className="font-display text-display-md font-bold mb-1.5">Plan a new trip</h1>
+      <p className="text-sm text-ink-soft mb-8">Start loose — dates and a title are all you need.</p>
+      <div className="tile p-7">
         <TripForm onSubmit={handleSubmit} submitting={submitting} />
       </div>
     </div>

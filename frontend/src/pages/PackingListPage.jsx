@@ -73,8 +73,8 @@ export default function PackingListPage() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleAdd} className="card p-5 mb-6 flex flex-wrap items-end gap-3">
+    <div className="pt-2">
+      <form onSubmit={handleAdd} className="tile p-6 mb-7 flex flex-wrap items-end gap-3">
         <div className="flex-1 min-w-[160px]">
           <Input
             label="Add item"
@@ -112,7 +112,7 @@ export default function PackingListPage() {
           description="Add items above — group them by category to keep packing simple."
         />
       ) : (
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-5">
           {Object.entries(grouped).map(([category, groupItems]) => (
             <PackingListGroup
               key={category}

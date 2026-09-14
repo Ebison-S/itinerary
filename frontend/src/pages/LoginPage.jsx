@@ -28,8 +28,8 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h1 className="font-display text-display-md mb-2">Welcome back</h1>
-      <p className="text-sm text-text-muted mb-8">Sign in to pick up where you left off.</p>
+      <h1 className="font-display text-display-sm font-bold mb-2">Welcome back</h1>
+      <p className="text-sm text-ink-soft mb-8">Sign in to pick up where you left off.</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
@@ -51,16 +51,16 @@ export default function LoginPage() {
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 
-        {error && <p className="text-sm text-danger">{error}</p>}
+        {error && <p className="text-sm text-coral-deep font-bold">{error}</p>}
 
         <Button type="submit" loading={status === 'loading'} className="w-full mt-2">
           Sign in
         </Button>
       </form>
 
-      <p className="text-sm text-text-muted mt-6">
-        New to Compass?{' '}
-        <Link to="/register" className="text-accent hover:text-accent-hover hover:underline">
+      <p className="text-sm text-ink-soft mt-7">
+        New to Waypoint?{' '}
+        <Link to="/register" className="text-coral font-bold hover:text-coral-deep hover:underline">
           Create an account
         </Link>
       </p>

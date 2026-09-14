@@ -46,9 +46,9 @@ export default function TripForm({ initialValues, onSubmit, submitting }) {
       />
 
       <div>
-        <label className="block text-sm font-medium text-text mb-1.5">Description</label>
+        <label className="block text-sm font-bold text-ink mb-1.5 pl-1">Description</label>
         <textarea
-          className="input-field min-h-[88px] resize-y"
+          className="input-field min-h-[96px] resize-y"
           placeholder="What's this trip about?"
           value={form.description}
           onChange={update('description')}
@@ -75,7 +75,7 @@ export default function TripForm({ initialValues, onSubmit, submitting }) {
         />
       </div>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <p className="text-sm text-coral-deep font-bold">{error}</p>}
 
       <Button type="submit" loading={submitting} className="w-full">
         {initialValues ? 'Save changes' : 'Create trip'}

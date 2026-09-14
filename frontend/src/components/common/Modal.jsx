@@ -21,7 +21,7 @@ export default function Modal({ open, onClose, title, children, footer, size = '
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+        className="absolute inset-0 bg-ink/50 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -29,14 +29,14 @@ export default function Modal({ open, onClose, title, children, footer, size = '
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`relative bg-surface-elevated border border-surface-border rounded-lg shadow-modal w-full ${widths[size]} p-6 animate-rise-in max-h-[85vh] overflow-y-auto`}
+        className={`relative bg-cream-paper rounded-tile shadow-soft w-full ${widths[size]} p-7 animate-rise-in max-h-[85vh] overflow-y-auto`}
       >
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="font-display text-xl">{title}</h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-display text-2xl font-bold">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="text-text-faint hover:text-text transition-colors p-1 rounded-md hover:bg-surface-hover"
+            className="text-ink-faint hover:text-coral transition-colors p-2 rounded-pill hover:bg-coral-soft"
           >
             <X className="w-5 h-5" />
           </button>
