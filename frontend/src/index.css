@@ -3,12 +3,67 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Theme tokens as CSS variables (space-separated RGB so Tailwind's
+   * `rgb(var(--x) / <alpha-value>)` pattern works with opacity modifiers
+   * like bg-ink/50). Swapping :root -> .dark swaps the entire app's
+   * palette without touching a single component file.
+   *
+   * Dark mode is a deliberate warm re-theme, not a naive color invert:
+   * deep warm charcoal-brown surfaces instead of pure black, brightened
+   * accents for contrast, and "soft" tints become deep tinted surfaces
+   * instead of pale washes.
+   */
+  :root {
+    --color-cream: 251 246 239;       /* #FBF6EF page background */
+    --color-cream-deep: 243 234 217;  /* #F3EAD9 section fill */
+    --color-cream-paper: 255 255 255; /* #FFFFFF card surface */
+    --color-ink: 32 28 29;            /* #201C1D primary text */
+    --color-ink-soft: 92 85 86;       /* #5C5556 muted text */
+    --color-ink-faint: 156 146 148;   /* #9C9294 faint text */
+    --color-coral: 255 107 74;        /* #FF6B4A primary accent */
+    --color-coral-deep: 225 79 48;    /* #E14F30 */
+    --color-coral-soft: 255 228 219;  /* #FFE4DB tint surface */
+    --color-gold: 242 183 5;          /* #F2B705 secondary accent */
+    --color-gold-soft: 253 240 199;   /* #FDF0C7 tint surface */
+    --color-teal: 31 138 112;         /* #1F8A70 success accent */
+    --color-teal-soft: 220 242 236;   /* #DCF2EC tint surface */
+    --color-border: 239 227 208;      /* #EFE3D0 */
+
+    --shadow-soft: 0 16px 40px -20px rgba(0, 0, 0, 0.18);
+    --shadow-soft-sm: 0 8px 20px -10px rgba(0, 0, 0, 0.14);
+  }
+
+  .dark {
+    --color-cream: 26 22 21;          /* #1A1615 page background */
+    --color-cream-deep: 34 28 27;     /* #221C1B section fill */
+    --color-cream-paper: 42 35 33;    /* #2A2321 card surface */
+    --color-ink: 245 238 230;         /* #F5EEE6 primary text */
+    --color-ink-soft: 184 170 162;    /* #B8AAA2 muted text */
+    --color-ink-faint: 122 110 104;   /* #7A6E68 faint text */
+    --color-coral: 255 130 100;       /* #FF8264 brightened for dark bg */
+    --color-coral-deep: 255 107 74;   /* #FF6B4A */
+    --color-coral-soft: 61 34 28;     /* #3D221C deep tinted surface */
+    --color-gold: 245 196 51;         /* #F5C433 brightened */
+    --color-gold-soft: 58 45 12;      /* #3A2D0C deep tinted surface */
+    --color-teal: 74 191 160;         /* #4ABFA0 brightened */
+    --color-teal-soft: 15 46 38;      /* #0F2E26 deep tinted surface */
+    --color-border: 58 48 45;         /* #3A302D */
+
+    --shadow-soft: 0 16px 40px -20px rgba(0, 0, 0, 0.55);
+    --shadow-soft-sm: 0 8px 20px -10px rgba(0, 0, 0, 0.45);
+  }
+
   html {
     color-scheme: light;
   }
 
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-cream text-ink font-sans antialiased;
+    @apply bg-cream text-ink font-sans antialiased transition-colors duration-200;
   }
 
   h1, h2, h3 {
@@ -20,7 +75,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid theme('colors.coral.DEFAULT');
+    outline: 2px solid rgb(var(--color-coral));
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -35,29 +90,32 @@
 }
 
 @layer components {
-  /* Bento tile: the primary content surface. White paper on cream,
-     generous radius, warm soft shadow instead of a flat border-only card. */
   .tile {
-    @apply bg-cream-paper rounded-tile shadow-soft-sm border border-border;
+    @apply bg-cream-paper rounded-tile border border-border transition-colors duration-200;
+    box-shadow: var(--shadow-soft-sm);
   }
 
   .tile-hover {
-    @apply transition-all duration-300 hover:shadow-soft hover:-translate-y-1;
+    @apply transition-all duration-300 hover:-translate-y-1;
+  }
+  .tile-hover:hover {
+    box-shadow: var(--shadow-soft);
   }
 
   .card {
-    @apply bg-cream-paper rounded-card shadow-soft-sm border border-border;
+    @apply bg-cream-paper rounded-card border border-border transition-colors duration-200;
+    box-shadow: var(--shadow-soft-sm);
   }
 
   .route-line {
-    stroke: theme('colors.coral.DEFAULT');
+    stroke: rgb(var(--color-coral));
     stroke-width: 2.5;
     fill: none;
     stroke-linecap: round;
   }
 
   .waypoint-dot {
-    fill: theme('colors.coral.DEFAULT');
+    fill: rgb(var(--color-coral));
   }
 
   .btn-primary {
@@ -119,8 +177,29 @@
     @apply badge bg-cream-deep text-ink-soft;
   }
 
-  /* Floating pill navigation -- replaces the sidebar pattern entirely. */
   .nav-pill {
-    @apply bg-cream-paper/90 backdrop-blur-md rounded-pill border border-border shadow-soft-sm;
+    @apply bg-cream-paper/90 backdrop-blur-md rounded-pill border border-border transition-colors duration-200;
+    box-shadow: var(--shadow-soft-sm);
+  }
+
+  /* Themed scrollbar for scrollable panels (AI progress log, plan
+     preview, dropdown-like lists) -- replaces the default OS scrollbar
+     that clashed with the rest of the design. */
+  .scroll-themed {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--color-coral) / 0.35) transparent;
+  }
+  .scroll-themed::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scroll-themed::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scroll-themed::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--color-coral) / 0.35);
+    border-radius: 999px;
+  }
+  .scroll-themed::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(var(--color-coral) / 0.55);
   }
 }

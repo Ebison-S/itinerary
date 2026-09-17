@@ -1,34 +1,35 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
         cream: {
-          DEFAULT: '#FBF6EF',
-          deep: '#F3EAD9',
-          paper: '#FFFFFF',
+          DEFAULT: 'rgb(var(--color-cream) / <alpha-value>)',
+          deep: 'rgb(var(--color-cream-deep) / <alpha-value>)',
+          paper: 'rgb(var(--color-cream-paper) / <alpha-value>)',
         },
         ink: {
-          DEFAULT: '#201C1D',
-          soft: '#5C5556',
-          faint: '#9C9294',
+          DEFAULT: 'rgb(var(--color-ink) / <alpha-value>)',
+          soft: 'rgb(var(--color-ink-soft) / <alpha-value>)',
+          faint: 'rgb(var(--color-ink-faint) / <alpha-value>)',
         },
         coral: {
-          DEFAULT: '#FF6B4A',
-          deep: '#E14F30',
-          soft: '#FFE4DB',
+          DEFAULT: 'rgb(var(--color-coral) / <alpha-value>)',
+          deep: 'rgb(var(--color-coral-deep) / <alpha-value>)',
+          soft: 'rgb(var(--color-coral-soft) / <alpha-value>)',
         },
         gold: {
-          DEFAULT: '#F2B705',
-          soft: '#FDF0C7',
+          DEFAULT: 'rgb(var(--color-gold) / <alpha-value>)',
+          soft: 'rgb(var(--color-gold-soft) / <alpha-value>)',
         },
         teal: {
-          DEFAULT: '#1F8A70',
-          soft: '#DCF2EC',
+          DEFAULT: 'rgb(var(--color-teal) / <alpha-value>)',
+          soft: 'rgb(var(--color-teal-soft) / <alpha-value>)',
         },
         border: {
-          DEFAULT: '#EFE3D0',
+          DEFAULT: 'rgb(var(--color-border) / <alpha-value>)',
         },
       },
       fontFamily: {
@@ -50,8 +51,8 @@ export default {
       boxShadow: {
         coral: '0 20px 40px -16px rgba(255,107,74,0.35)',
         'coral-sm': '0 10px 24px -12px rgba(255,107,74,0.3)',
-        soft: '0 16px 40px -20px rgba(32,28,29,0.18)',
-        'soft-sm': '0 8px 20px -10px rgba(32,28,29,0.14)',
+        soft: '0 16px 40px -20px rgba(0,0,0,0.25)',
+        'soft-sm': '0 8px 20px -10px rgba(0,0,0,0.18)',
         gold: '0 16px 32px -14px rgba(242,183,5,0.35)',
       },
       keyframes: {

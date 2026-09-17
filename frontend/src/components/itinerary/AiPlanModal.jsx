@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Sparkles, Navigation, Loader2, MapPin, Calendar, X } from 'lucide-react';
+import { Sparkles, Navigation, MapPin, Calendar, X } from 'lucide-react';
 import Modal from '../common/Modal';
 import Input from '../common/Input';
 import TagInput from '../common/TagInput';
@@ -229,7 +229,7 @@ export default function AiPlanModal({
             </div>
           )}
 
-          <div className="space-y-4 max-h-96 overflow-y-auto pr-1">
+          <div className="space-y-4 max-h-96 overflow-y-auto scroll-themed pr-2">
             {plan.days?.map((day) => (
               <div key={day.dayNumber} className="border-l-4 border-coral-soft pl-4">
                 <div className="flex items-center gap-2 mb-2">
@@ -270,7 +270,6 @@ export default function AiPlanModal({
               Discard
             </Button>
             <Button className="flex-1" loading={applyStatus === 'loading'} onClick={onApplyPlan}>
-              {applyStatus === 'loading' && <Loader2 className="w-4 h-4 animate-spin" />}
               Apply to trip
             </Button>
           </div>
