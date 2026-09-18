@@ -9,7 +9,7 @@ LLM_API_KEY = os.getenv ('LLM_API_KEY')
 
 LLM_MODEL = os.getenv ('LLM_MODEL')
 
-PROJECT_ROOT = Path(__file__).parent.paent
+PROJECT_ROOT = Path(__file__).parent.paents
 
 PROMPTS_DIR = PROJECT_ROOT / "prompt" / "templates"
 
