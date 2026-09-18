@@ -11,6 +11,6 @@ LLM_MODEL = os.getenv ('LLM_MODEL')
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
-PROMPTS_DIR = PROJECT_ROOT / "prompts" / "templates"
+PROMPTS_DIR = PROJECT_ROOT / "prompt" / "templates"
 
 print (f"{PROMPTS_DIR}")
